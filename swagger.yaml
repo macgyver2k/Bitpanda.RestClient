@@ -1,0 +1,997 @@
+﻿openapi: 3.0.0
+info:
+  description: OpenAPI 3.0 definition for bitpanda.com public API
+  version: 1.0.0-oas3
+  title: Bitpanda Public API
+security:
+  - api_key: []
+tags: 
+  - name: trades
+  - name: wallets
+  - name: fiatwallets
+  - name: asset-wallets
+  - name: assets
+paths:
+  /wallets:
+    get:
+      tags: 
+        - wallets
+      operationId: wallets_get
+      parameters:
+        - in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+  /trades:
+    get:
+      tags: 
+        - trades
+      operationId: trades_get
+      parameters:
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/TradeType'
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradesResult'
+  /wallets/transactions:
+    get:
+      tags:
+        - wallets
+      operationId: wallets_getTransactions
+      parameters: 
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/TransactionType'
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTransactionsResult'
+  /fiatwallets:
+    get:
+      description: 'Get all user wallets'
+      tags:
+        - fiatwallets
+      operationId: fiatWallets_get
+      responses:
+        '200':
+          description: 'All user wallets'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FiatWalletsResult'
+  /fiatwallets/transactions:
+    get:
+      tags:
+        - fiatwallets
+      operationId: fiatWallets_getTransactions
+      parameters: 
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/FiatWalletTransactionType'
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FiatWalletTransactionsResult'
+  /asset-wallets:
+    get:
+      tags:
+        - asset-wallets
+      description: "Get user's wallets based on assets"
+      operationId: assetWallets_get
+      responses:
+        '200':
+          description: "All user's wallets based on assets"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetWalletsResult'
+  
+  /assets/transactions/commodity:
+    get:
+      tags:
+        - assets
+      description: "Get user's commodity transactions"
+      operationId: assets_getCommodityTransactions
+      parameters:
+        - in: query
+          name: page
+          description: "Used for pagination of response"
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: page_size
+          description: "Size of a page for the paginated response"
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: "All user's wallets based on assets"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetCommodityTransactionsResult'
+    
+servers:
+  - url: 'https://api.bitpanda.com/v1'
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    AssetCommodityTransactionsResult:
+      type: object
+      required:
+        - data
+        - meta
+        - links
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetCommodityTransaction'
+        meta:
+          $ref: '#/components/schemas/PagingResult'
+        links:
+          $ref: '#/components/schemas/AssetCommodityTransactionsResultLinksResult'
+    
+    AssetCommodityTransaction:
+      type: object
+      required: 
+        - type
+        - attributes
+      properties:
+        type:
+          type: string
+          example: 'collection'
+        attributes:
+          $ref: '#/components/schemas/AssetCommodityTransactionAttributes'
+    
+    AssetCommodityTransactionAttributes:
+      type: object
+      required: 
+        - amount
+        - recipient
+        - time
+        - confirmations
+        - in_or_out
+        - type
+        - status
+        - amount_eur
+        - purpose_text
+        - related_wallet_transaction_id
+        - related_wallet_id
+        - wallet_id
+        - confirmed
+        - cryptocoin_id
+        - last_changed
+        - fee
+        - current_fiat_id
+        - current_fiat_amount
+        - tx_id
+      properties:
+        amount:
+          type: string
+          format: decimal
+          example: "10.00000000"
+        recipient: 
+          type: string
+          example: ""
+        time: 
+          $ref: '#/components/schemas/TimeResult' 
+        confirmations: 
+          type: integer
+          example: 99
+          minimum: 0
+        in_or_out: 
+          $ref: '#/components/schemas/TransactionDirection'
+        type: 
+          $ref: '#/components/schemas/TransactionType'
+        status: 
+          $ref: '#/components/schemas/TransactionStatus'
+        amount_eur: 
+          type: string
+          format: decimal
+          example: "34333.00"
+        purpose_text:
+          type: string
+          example: ""
+        related_wallet_transaction_id: 
+          type: string
+          format: uuid
+          example: "6492ece0-35ee-11e9-9529-3d43ab8964c7"
+        related_wallet_id: 
+          type: string
+          format: uuid
+          example: "87e69890-c87d-11e8-b039-a7fc9124f788"
+        wallet_id: 
+          type: string
+          format: uuid
+          example: "b8448e50-21e4-11e8-923c-83856b384ff7"
+        confirmed: 
+          type: boolean
+          example: true
+        cryptocoin_id: 
+          type: string
+          example: "1"
+        cryptocoin_symbol: 
+          type: string
+          example: "BTC"
+        trade_id: 
+          type: string
+          example: "123456789"
+        trade:
+          $ref: '#/components/schemas/Trade'
+        last_changed: 
+          $ref: '#/components/schemas/TimeResult' 
+        fee:
+          type: string
+          format: decimal
+          example: "0.00000000"
+        current_fiat_id:
+          type: string
+          example: "2"
+        current_fiat_amount: 
+          type: string
+          format: decimal
+          example: "39021.02"
+        tx_id: 
+          type: string
+          example: "internal"
+        is_savings:
+          type: boolean
+          example: false
+        is_bfc:
+          type: boolean
+          example: false
+        is_card:
+          type: boolean
+          example: false
+        tags:
+          type: array
+          items:
+            type: string
+            example: tag
+        public_status:
+          $ref: '#/components/schemas/TransactionPublicStatus'
+    
+    AssetCommodityTransactionsResultLinksResult:
+      required:
+        - self
+      properties:
+        self:
+          type: string
+          format: url
+          example: "?page=1&page_size=25"
+  
+    AssetWalletsResult:
+      type: object
+      required:
+        - data
+      properties:
+        type:
+          $ref: '#/components/schemas/AssetWalletsResultData'
+            
+    AssetWalletsResultData:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'data'
+        attributes:
+          $ref: '#/components/schemas/AssetWalletsResultDataAttributes'
+    
+    AssetWalletsResultDataAttributes:
+      type: object
+      required:
+        - cryptocoin
+        - commodity
+        - index
+        - security
+      properties:
+        cryptocoin:
+          $ref: '#/components/schemas/AssetWalletsResultCollection'
+        commodity:
+          $ref: '#/components/schemas/AssetWalletsResultDataCommodity'
+        index:
+          $ref: '#/components/schemas/AssetWalletsResultDataIndex'
+        security:
+          $ref: '#/components/schemas/AssetWalletsResultDataSecurity'
+    
+    
+    AssetWalletsResultCollection:
+      type: object
+      required: 
+        - type
+        - attributes
+      properties:
+        type:
+          type: string
+          example: 'collection'
+        attributes:
+          $ref: '#/components/schemas/AssetWalletsAttributes'
+          
+    AssetWalletsAttributes:
+      type: object
+      required: 
+        - wallets
+      properties:
+        wallets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Wallet'
+            
+    AssetWalletsResultDataCommodity:
+      type: object
+      required: 
+        - metal
+      properties:
+        metal:
+          $ref: '#/components/schemas/AssetWalletsResultCollection'
+    
+    AssetWalletsResultDataIndex:
+      type: object
+      required: 
+        - index
+      properties:
+        index:
+          $ref: '#/components/schemas/AssetWalletsResultCollection'
+    
+   
+    AssetWalletsResultDataSecurity:
+      type: object
+      required: 
+        - stock
+        - etf
+      properties:
+        stock:
+          $ref: '#/components/schemas/AssetWalletsResultCollection'
+        etf:
+          $ref: '#/components/schemas/AssetWalletsResultCollection'
+    
+    FiatWalletsResult:
+      type: object
+      required:
+        - data
+        - meta
+        - links
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiatWallet'
+        meta:
+          $ref: '#/components/schemas/PagingResult'
+        links:
+          $ref: '#/components/schemas/LinksResult'
+    
+    FiatWallet:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: "fiat_wallet"
+        attributes:
+          $ref: '#/components/schemas/FiatWalletAttributes'
+    
+    FiatWalletAttributes:
+      type: object
+      properties:
+        fiat_id:
+          type: string
+          example: "1"
+        fiat_symbol:
+          type: string
+          example: "EUR"
+        ballance:
+          type: string
+          format: decimal
+          example: "9909.00000000"
+        name:
+          type: string
+          example: "EUR Wallet"
+        pending_transactions_count:
+          type: integer
+          example: 0
+    
+    FiatWalletTransactionsResult:
+      type: object
+      required:
+        - data
+        - meta
+        - links
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiatWalletTransaction'
+        meta:
+          $ref: '#/components/schemas/PagingResult'
+        links:
+          $ref: '#/components/schemas/LinksResult'
+    
+    FiatWalletTransaction:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: "wallet_transaction"
+        attributes:
+          $ref: '#/components/schemas/FiatWalletTransactionAttributes'
+    
+    FiatWalletTransactionAttributes:
+      type: object
+      required: 
+        - fiat_wallet_id
+        - user_id
+        - fiat_id
+        - amount
+        - fee
+        - to_eur_rate
+        - time
+        - in_or_out
+        - type
+        - status
+        - confirmation_by
+        - confirmed
+        - payment_option_id
+        - requires_2fa_approval
+        - last_changed
+      properties:
+        fiat_wallet_id: 
+          type: string
+          format: uuid
+          example: "6492ece0-35ee-11e9-9529-3d43ab8964c7"
+        user_id: 
+          type: string
+          format: uuid
+          example: "87e69890-c87d-11e8-b039-a7fc9124f788"
+        fiat_id: 
+          type: string
+          format: int32
+          example: "1"
+        amount:
+          type: string
+          format: decimal
+          example: "10.00000000"
+        fee:
+          type: string
+          format: decimal
+          example: "0.00000000"
+        to_eur_rate: 
+          type: string
+          format: decimal
+          example: "1.00000000"
+        in_or_out: 
+          $ref: '#/components/schemas/TransactionDirection'
+        time: 
+          $ref: '#/components/schemas/TimeResult' 
+        type: 
+          $ref: '#/components/schemas/TransactionType'
+        status: 
+          $ref: '#/components/schemas/TransactionStatus'
+        confirmed: 
+          type: boolean
+          example: true
+        confirmation_by: 
+          $ref: '#/components/schemas/TransactionConfirmationBy'
+        requires_2fa_approval: 
+          type: boolean
+          example: true
+        payment_option_id:
+          type: string
+          example: "12"
+        last_changed:
+          $ref: '#/components/schemas/TimeResult' 
+        trade:
+          $ref: '#/components/schemas/Trade'
+        is_savings:
+          type: boolean
+          example: false
+        is_card:
+          type: boolean
+          example: false
+        is_index:
+          type: boolean
+          example: false
+        tags:
+          type: array
+          items:
+            type: string
+            example: tag
+        public_status:
+          $ref: '#/components/schemas/TransactionPublicStatus'
+    
+    TransactionConfirmationBy:
+      type: string
+      enum:
+        - not_required
+    
+    TransactionType:
+      type: string
+      enum:
+        - buy
+        - sell
+        - deposit
+        - withdrawal
+        - transfer
+        - refunc
+        - ico
+      example: "transfer"
+    
+    FiatWalletTransactionType:
+      type: string
+      enum:
+        - buy
+        - sell
+        - deposit
+        - withdrawal
+        - transfer
+        - refunc
+      example: "transfer"
+    
+    WalletTransactionsResult:
+      type: object
+      required:
+        - data
+        - meta
+        - links
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletTransaction'
+        meta:
+          $ref: '#/components/schemas/PagingResult'
+        links:
+          $ref: '#/components/schemas/LinksResult'
+    
+    WalletTransaction:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: "wallet_transaction"
+        attributes:
+          $ref: '#/components/schemas/WalletTransactionAttributes'
+    
+    WalletTransactionAttributes:
+      type: object
+      required: 
+        - amount
+        - recipient
+        - time
+        - confirmations
+        - in_or_out
+        - type
+        - status
+        - amount_eur
+        - purpose_text
+        - related_wallet_transaction_id
+        - related_wallet_id
+        - wallet_id
+        - confirmed
+        - cryptocoin_id
+        - last_changed
+        - fee
+        - current_fiat_id
+        - current_fiat_amount
+        - tx_id
+      properties:
+        amount:
+          type: string
+          format: decimal
+          example: "10.00000000"
+        recipient: 
+          type: string
+          example: ""
+        time: 
+          $ref: '#/components/schemas/TimeResult' 
+        confirmations: 
+          type: integer
+          example: 99
+          minimum: 0
+        in_or_out: 
+          $ref: '#/components/schemas/TransactionDirection'
+        type: 
+          $ref: '#/components/schemas/TransactionType'
+        status: 
+          $ref: '#/components/schemas/TransactionStatus'
+        amount_eur: 
+          type: string
+          format: decimal
+          example: "34333.00"
+        purpose_text:
+          type: string
+          example: ""
+        related_wallet_transaction_id: 
+          type: string
+          format: uuid
+          example: "6492ece0-35ee-11e9-9529-3d43ab8964c7"
+        related_wallet_id: 
+          type: string
+          format: uuid
+          example: "87e69890-c87d-11e8-b039-a7fc9124f788"
+        wallet_id: 
+          type: string
+          format: uuid
+          example: "b8448e50-21e4-11e8-923c-83856b384ff7"
+        confirmed: 
+          type: boolean
+          example: true
+        cryptocoin_id: 
+          type: string
+          example: "1"
+        cryptocoin_symbol: 
+          type: string
+          example: "BTC"
+        trade_id: 
+          type: string
+          example: "123456789"
+        trade:
+          $ref: '#/components/schemas/Trade'
+        last_changed: 
+          $ref: '#/components/schemas/TimeResult' 
+        fee:
+          type: string
+          format: decimal
+          example: "0.00000000"
+        current_fiat_id:
+          type: string
+          example: "2"
+        current_fiat_amount: 
+          type: string
+          format: decimal
+          example: "39021.02"
+        tx_id: 
+          type: string
+          example: "internal"
+        is_savings:
+          type: boolean
+          example: false
+        is_bfc:
+          type: boolean
+          example: false
+        is_card:
+          type: boolean
+          example: false
+        tags:
+          type: array
+          items:
+            type: string
+            example: tag
+        public_status:
+          $ref: '#/components/schemas/TransactionPublicStatus'
+ 
+    TransactionPublicStatus:
+      type: string
+      enum:
+        - finished
+ 
+    TransactionDirection:
+      type: string
+      enum:
+        - incoming
+        - outgoing
+      example: "outgoing"
+   
+    TransactionStatus:
+      type: string
+      enum:
+        - finished
+      example: "finished"
+    
+    Wallet:
+      type: object
+      required: 
+        - type
+        - id
+        - attributes
+      properties:
+        type:
+          type: string
+          example: "wallet"
+        id:
+          type: string
+          format: uuid
+        attributes:
+          $ref: '#/components/schemas/WalletAttributes'
+ 
+    WalletAttributes:
+      type: object
+      required:
+        - cryptocoin_id
+        - cryptocoin_symbol
+        - balance
+        - is_default
+        - name
+        - pending_transactions_count
+        - deleted
+        - is_index
+      properties:
+        cryptocoin_id:
+          type: string
+          example: "1"
+        cryptocoin_symbol:
+          type: string
+          example: "BTC"
+        balance:
+          type: string
+          format: decimal
+          example: "1.00000000"
+        is_default:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: "First wallet"
+        pending_transactions_count:
+          type: integer
+          example: 0
+        deleted:
+          type: boolean
+          example: false
+        is_index:
+          type: boolean
+          example: false
+  
+    TradeType:
+      type: string
+      enum:
+        - buy
+        - sell
+ 
+    TradeAttributes:
+      type: object
+      required:
+        - status
+        - type
+        - cryptocoin_id
+        - fiat_id
+        - amount_fiat
+        - amount_cryptocoin
+        - fiat_to_eur_rate
+        - wallet_id
+        - fiat_wallet_id
+        - payment_option_id
+        - time
+        - price
+        - is_swap
+      properties:
+        status:
+          type: string
+          example: finished
+        type:
+          $ref: '#/components/schemas/TradeType'
+        cryptocoin_id:
+          type: string
+          example: '1'
+        fiat_id:
+          type: string
+          example: '1'
+        amount_fiat:
+          type: string
+          format: decimal
+          example: '100.00'
+        amount_cryptocoin:
+          type: string
+          example: '0,03325352'
+        fiat_to_eur_rate:
+          type: string
+          format: decimal
+          example: '1.00000000'
+        wallet_id:
+          type: string
+          format: uuid
+          example: b8448e50-21e4-11e8-923c-83856b384ff7
+        fiat_wallet_id:
+          type: string
+          format: uuid
+          example: 4019cdb0-1d62-11e8-b4b2-313f9b0a3bca
+        payment_option_id:
+          type: string
+          example: '12'
+        time:
+          $ref: '#/components/schemas/TimeResult'
+        price:
+          type: string
+          format: decimal
+          example: '3007.20'
+        is_swap:
+          type: boolean
+          example: true
+        is_savings:
+          type: boolean
+          example: true
+        is_card:
+          type: boolean
+          example: true
+        bfc_used:
+          type: boolean
+          example: true
+        tags:
+          type: array
+          items:
+            type: string
+            example: tag
+ 
+    TimeResult:
+      type: object
+      required:
+        - date_iso8601
+        - unix
+      properties:
+        date_iso8601:
+          type: string
+          format: date-time
+        unix:
+          type: string
+          format: int32
+    Trade:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/TradeAttributes'
+  
+    LinksResult:
+      required:
+        - next
+        - last
+        - self
+      properties:
+        next:
+          type: string
+          format: url
+        last:
+          type: string
+          format: url
+        self:
+          type: string
+          format: url
+  
+    PagingResult:
+      type: object
+      required:
+        - page
+        - page_size
+        - total_count
+      properties:
+        page:
+          type: integer
+          format: int32
+        page_size:
+          type: integer
+          format: int32
+        total_count:
+          type: integer
+          format: int32
+   
+    TradesResult:
+      type: object
+      required:
+        - data
+        - meta
+        - links
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trade'
+        meta:
+          $ref: '#/components/schemas/PagingResult'
+        links:
+          $ref: '#/components/schemas/LinksResult'

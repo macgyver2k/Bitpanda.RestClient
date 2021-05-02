@@ -2,9 +2,7 @@ name: .NET
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ main ]  
 
 jobs:
   build:
@@ -23,3 +21,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish NuGet      
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/FluentEmail.Core/FluentEmail.Core.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}                                                             
+        INCLUDE_SYMBOLS: true

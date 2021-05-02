@@ -1,0 +1,22 @@
+{
+  "runtime": "Net50",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "swagger.yaml",
+      "output": null
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpClient": {
+      "generateClientClasses": true,
+      "generateClientInterfaces": true,
+      "injectHttpClient": true,
+      "namespace": "Bitpanda.RestClient",
+      "classStyle": "Record",
+      "generateImmutableArrayProperties": true,
+      "generateImmutableDictionaryProperties": true,
+      "generateOptionalParameters": true,
+      "output": "Clients.cs"
+    }
+  }
+}

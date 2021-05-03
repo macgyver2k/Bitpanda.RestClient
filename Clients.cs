@@ -2471,7 +2471,7 @@ namespace Bitpanda.RestClient
     public partial class TradeAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public TradeAttributes(string @amount_cryptocoin, decimal @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, decimal @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
+        public TradeAttributes(decimal @amount_cryptocoin, decimal @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, decimal @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
         {
             this.Status = @status;
             this.Type = @type;
@@ -2514,8 +2514,7 @@ namespace Bitpanda.RestClient
         public decimal Amount_fiat { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_cryptocoin", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount_cryptocoin { get; }
+        public decimal Amount_cryptocoin { get; }
     
         [Newtonsoft.Json.JsonProperty("fiat_to_eur_rate", Required = Newtonsoft.Json.Required.Always)]
         public decimal Fiat_to_eur_rate { get; }

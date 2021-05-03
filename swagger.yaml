@@ -340,12 +340,9 @@ components:
           $ref: '#/components/schemas/TransactionPublicStatus'
     
     AssetCommodityTransactionsResultLinksResult:
-      required:
-        - self
       properties:
         self:
           type: string
-          format: url
           example: "?page=1&page_size=25"
   
     AssetWalletsResult:
@@ -947,18 +944,13 @@ components:
           $ref: '#/components/schemas/TradeAttributes'
   
     LinksResult:
-      required:
-        - self
       properties:
         next:
           type: string
-          format: url
         last:
           type: string
-          format: url
         self:
           type: string
-          format: url
   
     PagingResult:
       type: object

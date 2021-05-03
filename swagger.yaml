@@ -41,7 +41,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Wallet'
+                items:
+                  $ref: '#/components/schemas/WalletsResult'
   /trades:
     get:
       tags: 
@@ -203,6 +204,14 @@ components:
       in: header
       name: X-API-KEY
   schemas:
+    WalletsResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Wallet'
+  
     AssetCommodityTransactionsResult:
       type: object
       required:

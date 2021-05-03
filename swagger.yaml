@@ -881,7 +881,8 @@ components:
           format: decimal
           example: '100.00'
         amount_cryptocoin:
-          type: string
+          type: number
+          format: decimal
           example: '0,03325352'
         fiat_to_eur_rate:
           type: number

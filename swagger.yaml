@@ -41,7 +41,6 @@ paths:
           content:
             application/json:
               schema:
-                items:
                   $ref: '#/components/schemas/WalletsResult'
   /trades:
     get:

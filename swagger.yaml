@@ -948,8 +948,6 @@ components:
   
     LinksResult:
       required:
-        - next
-        - last
         - self
       properties:
         next:

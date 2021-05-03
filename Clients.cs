@@ -2459,7 +2459,7 @@ namespace Bitpanda.RestClient
     public partial class TradeAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public TradeAttributes(string @amount_cryptocoin, string @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, string @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, string @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
+        public TradeAttributes(string @amount_cryptocoin, string @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, string @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
         {
             this.Status = @status;
             this.Type = @type;
@@ -2526,8 +2526,7 @@ namespace Bitpanda.RestClient
         public TimeResult Time { get; }
     
         [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Price { get; }
+        public decimal Price { get; }
     
         [Newtonsoft.Json.JsonProperty("is_swap", Required = Newtonsoft.Json.Required.Always)]
         public bool Is_swap { get; }

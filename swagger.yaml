@@ -893,7 +893,7 @@ components:
         time:
           $ref: '#/components/schemas/TimeResult'
         price:
-          type: string
+          type: number
           format: decimal
           example: '3007.20'
         is_swap:

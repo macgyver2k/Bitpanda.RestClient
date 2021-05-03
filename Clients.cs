@@ -2010,11 +2010,10 @@ namespace Bitpanda.RestClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TransactionConfirmationBy Confirmation_by { get; }
     
-        [Newtonsoft.Json.JsonProperty("requires_2fa_approval", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("requires_2fa_approval", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Requires_2fa_approval { get; }
     
-        [Newtonsoft.Json.JsonProperty("payment_option_id", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonProperty("payment_option_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Payment_option_id { get; }
     
         [Newtonsoft.Json.JsonProperty("last_changed", Required = Newtonsoft.Json.Required.Always)]
@@ -2461,7 +2460,7 @@ namespace Bitpanda.RestClient
     public partial class TradeAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public TradeAttributes(string @amount_cryptocoin, string @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, string @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, string @price, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
+        public TradeAttributes(string @amount_cryptocoin, string @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, string @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, string @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
         {
             this.Status = @status;
             this.Type = @type;
@@ -2480,6 +2479,7 @@ namespace Bitpanda.RestClient
             this.Is_card = @is_card;
             this.Bfc_used = @bfc_used;
             this.Tags = @tags;
+            this.Related_swap_trade = @related_swap_trade;
         }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
@@ -2519,8 +2519,7 @@ namespace Bitpanda.RestClient
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid Fiat_wallet_id { get; }
     
-        [Newtonsoft.Json.JsonProperty("payment_option_id", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonProperty("payment_option_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Payment_option_id { get; }
     
         [Newtonsoft.Json.JsonProperty("time", Required = Newtonsoft.Json.Required.Always)]
@@ -2545,6 +2544,9 @@ namespace Bitpanda.RestClient
     
         [Newtonsoft.Json.JsonProperty("tags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> Tags { get; }
+    
+        [Newtonsoft.Json.JsonProperty("related_swap_trade", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Trade Related_swap_trade { get; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     

@@ -532,8 +532,6 @@ components:
         - status
         - confirmation_by
         - confirmed
-        - payment_option_id
-        - requires_2fa_approval
         - last_changed
       properties:
         fiat_wallet_id: 

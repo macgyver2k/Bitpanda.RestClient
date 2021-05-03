@@ -255,7 +255,7 @@ components:
         - tx_id
       properties:
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         recipient: 
@@ -274,7 +274,7 @@ components:
         status: 
           $ref: '#/components/schemas/TransactionStatus'
         amount_eur: 
-          type: string
+          type: number
           format: decimal
           example: "34333.00"
         purpose_text:
@@ -309,14 +309,14 @@ components:
         last_changed: 
           $ref: '#/components/schemas/TimeResult' 
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         current_fiat_id:
           type: string
           example: "2"
         current_fiat_amount: 
-          type: string
+          type: number
           format: decimal
           example: "39021.02"
         tx_id: 
@@ -472,7 +472,7 @@ components:
           type: string
           example: "EUR"
         ballance:
-          type: string
+          type: number
           format: decimal
           example: "9909.00000000"
         name:
@@ -544,15 +544,15 @@ components:
           format: int32
           example: "1"
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         to_eur_rate: 
-          type: string
+          type: number
           format: decimal
           example: "1.00000000"
         in_or_out: 
@@ -679,7 +679,7 @@ components:
         - tx_id
       properties:
         amount:
-          type: string
+          type: number
           format: decimal
           example: "10.00000000"
         recipient: 
@@ -698,7 +698,7 @@ components:
         status: 
           $ref: '#/components/schemas/TransactionStatus'
         amount_eur: 
-          type: string
+          type: number
           format: decimal
           example: "34333.00"
         purpose_text:
@@ -733,14 +733,14 @@ components:
         last_changed: 
           $ref: '#/components/schemas/TimeResult' 
         fee:
-          type: string
+          type: number
           format: decimal
           example: "0.00000000"
         current_fiat_id:
           type: string
           example: "2"
         current_fiat_amount: 
-          type: string
+          type: number
           format: decimal
           example: "39021.02"
         tx_id: 
@@ -816,7 +816,7 @@ components:
           type: string
           example: "BTC"
         balance:
-          type: string
+          type: number
           format: decimal
           example: "1.00000000"
         is_default:
@@ -869,14 +869,14 @@ components:
           type: string
           example: '1'
         amount_fiat:
-          type: string
+          type: number
           format: decimal
           example: '100.00'
         amount_cryptocoin:
           type: string
           example: '0,03325352'
         fiat_to_eur_rate:
-          type: string
+          type: number
           format: decimal
           example: '1.00000000'
         wallet_id:

@@ -1354,7 +1354,7 @@ namespace Bitpanda.RestClient
     public partial class AssetCommodityTransactionAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public AssetCommodityTransactionAttributes(string @amount, string @amount_eur, int @confirmations, bool @confirmed, string @cryptocoin_id, string @cryptocoin_symbol, string @current_fiat_amount, string @current_fiat_id, string @fee, TransactionDirection @in_or_out, bool @is_bfc, bool @is_card, bool @is_savings, TimeResult @last_changed, TransactionPublicStatus @public_status, string @purpose_text, string @recipient, System.Guid @related_wallet_id, System.Guid @related_wallet_transaction_id, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, Trade @trade, string @trade_id, string @tx_id, TransactionType @type, System.Guid @wallet_id)
+        public AssetCommodityTransactionAttributes(decimal @amount, decimal @amount_eur, int @confirmations, bool @confirmed, string @cryptocoin_id, string @cryptocoin_symbol, decimal @current_fiat_amount, string @current_fiat_id, decimal @fee, TransactionDirection @in_or_out, bool @is_bfc, bool @is_card, bool @is_savings, TimeResult @last_changed, TransactionPublicStatus @public_status, string @purpose_text, string @recipient, System.Guid @related_wallet_id, System.Guid @related_wallet_transaction_id, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, Trade @trade, string @trade_id, string @tx_id, TransactionType @type, System.Guid @wallet_id)
         {
             this.Amount = @amount;
             this.Recipient = @recipient;
@@ -1386,8 +1386,7 @@ namespace Bitpanda.RestClient
         }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount { get; }
+        public decimal Amount { get; }
     
         [Newtonsoft.Json.JsonProperty("recipient", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -1417,8 +1416,7 @@ namespace Bitpanda.RestClient
         public TransactionStatus Status { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_eur", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount_eur { get; }
+        public decimal Amount_eur { get; }
     
         [Newtonsoft.Json.JsonProperty("purpose_text", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -1457,16 +1455,14 @@ namespace Bitpanda.RestClient
         public TimeResult Last_changed { get; }
     
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Fee { get; }
+        public decimal Fee { get; }
     
         [Newtonsoft.Json.JsonProperty("current_fiat_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Current_fiat_id { get; }
     
         [Newtonsoft.Json.JsonProperty("current_fiat_amount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Current_fiat_amount { get; }
+        public decimal Current_fiat_amount { get; }
     
         [Newtonsoft.Json.JsonProperty("tx_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -1824,7 +1820,7 @@ namespace Bitpanda.RestClient
     public partial class FiatWalletAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public FiatWalletAttributes(string @ballance, string @fiat_id, string @fiat_symbol, string @name, int @pending_transactions_count)
+        public FiatWalletAttributes(decimal @ballance, string @fiat_id, string @fiat_symbol, string @name, int @pending_transactions_count)
         {
             this.Fiat_id = @fiat_id;
             this.Fiat_symbol = @fiat_symbol;
@@ -1840,7 +1836,7 @@ namespace Bitpanda.RestClient
         public string Fiat_symbol { get; }
     
         [Newtonsoft.Json.JsonProperty("ballance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ballance { get; }
+        public decimal Ballance { get; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; }
@@ -1933,7 +1929,7 @@ namespace Bitpanda.RestClient
     public partial class FiatWalletTransactionAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public FiatWalletTransactionAttributes(string @amount, TransactionConfirmationBy @confirmation_by, bool @confirmed, string @fee, string @fiat_id, System.Guid @fiat_wallet_id, TransactionDirection @in_or_out, bool @is_card, bool @is_index, bool @is_savings, TimeResult @last_changed, string @payment_option_id, TransactionPublicStatus @public_status, bool @requires_2fa_approval, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, string @to_eur_rate, Trade @trade, TransactionType @type, System.Guid @user_id)
+        public FiatWalletTransactionAttributes(decimal @amount, TransactionConfirmationBy @confirmation_by, bool @confirmed, decimal @fee, string @fiat_id, System.Guid @fiat_wallet_id, TransactionDirection @in_or_out, bool @is_card, bool @is_index, bool @is_savings, TimeResult @last_changed, string @payment_option_id, TransactionPublicStatus @public_status, bool @requires_2fa_approval, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, decimal @to_eur_rate, Trade @trade, TransactionType @type, System.Guid @user_id)
         {
             this.Fiat_wallet_id = @fiat_wallet_id;
             this.User_id = @user_id;
@@ -1971,16 +1967,13 @@ namespace Bitpanda.RestClient
         public string Fiat_id { get; }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount { get; }
+        public decimal Amount { get; }
     
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Fee { get; }
+        public decimal Fee { get; }
     
         [Newtonsoft.Json.JsonProperty("to_eur_rate", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string To_eur_rate { get; }
+        public decimal To_eur_rate { get; }
     
         [Newtonsoft.Json.JsonProperty("in_or_out", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2180,7 +2173,7 @@ namespace Bitpanda.RestClient
     public partial class WalletTransactionAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WalletTransactionAttributes(string @amount, string @amount_eur, int @confirmations, bool @confirmed, string @cryptocoin_id, string @cryptocoin_symbol, string @current_fiat_amount, string @current_fiat_id, string @fee, TransactionDirection @in_or_out, bool @is_bfc, bool @is_card, bool @is_savings, TimeResult @last_changed, TransactionPublicStatus @public_status, string @purpose_text, string @recipient, System.Guid @related_wallet_id, System.Guid @related_wallet_transaction_id, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, Trade @trade, string @trade_id, string @tx_id, TransactionType @type, System.Guid @wallet_id)
+        public WalletTransactionAttributes(decimal @amount, decimal @amount_eur, int @confirmations, bool @confirmed, string @cryptocoin_id, string @cryptocoin_symbol, decimal @current_fiat_amount, string @current_fiat_id, decimal @fee, TransactionDirection @in_or_out, bool @is_bfc, bool @is_card, bool @is_savings, TimeResult @last_changed, TransactionPublicStatus @public_status, string @purpose_text, string @recipient, System.Guid @related_wallet_id, System.Guid @related_wallet_transaction_id, TransactionStatus @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, Trade @trade, string @trade_id, string @tx_id, TransactionType @type, System.Guid @wallet_id)
         {
             this.Amount = @amount;
             this.Recipient = @recipient;
@@ -2212,8 +2205,7 @@ namespace Bitpanda.RestClient
         }
     
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount { get; }
+        public decimal Amount { get; }
     
         [Newtonsoft.Json.JsonProperty("recipient", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2243,8 +2235,7 @@ namespace Bitpanda.RestClient
         public TransactionStatus Status { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_eur", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount_eur { get; }
+        public decimal Amount_eur { get; }
     
         [Newtonsoft.Json.JsonProperty("purpose_text", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2283,16 +2274,14 @@ namespace Bitpanda.RestClient
         public TimeResult Last_changed { get; }
     
         [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Fee { get; }
+        public decimal Fee { get; }
     
         [Newtonsoft.Json.JsonProperty("current_fiat_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Current_fiat_id { get; }
     
         [Newtonsoft.Json.JsonProperty("current_fiat_amount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Current_fiat_amount { get; }
+        public decimal Current_fiat_amount { get; }
     
         [Newtonsoft.Json.JsonProperty("tx_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2392,7 +2381,7 @@ namespace Bitpanda.RestClient
     public partial class WalletAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WalletAttributes(string @balance, string @cryptocoin_id, string @cryptocoin_symbol, bool @deleted, bool @is_default, bool @is_index, string @name, int @pending_transactions_count)
+        public WalletAttributes(decimal @balance, string @cryptocoin_id, string @cryptocoin_symbol, bool @deleted, bool @is_default, bool @is_index, string @name, int @pending_transactions_count)
         {
             this.Cryptocoin_id = @cryptocoin_id;
             this.Cryptocoin_symbol = @cryptocoin_symbol;
@@ -2413,8 +2402,7 @@ namespace Bitpanda.RestClient
         public string Cryptocoin_symbol { get; }
     
         [Newtonsoft.Json.JsonProperty("balance", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Balance { get; }
+        public decimal Balance { get; }
     
         [Newtonsoft.Json.JsonProperty("is_default", Required = Newtonsoft.Json.Required.Always)]
         public bool Is_default { get; }
@@ -2459,7 +2447,7 @@ namespace Bitpanda.RestClient
     public partial class TradeAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public TradeAttributes(string @amount_cryptocoin, string @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, string @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
+        public TradeAttributes(string @amount_cryptocoin, decimal @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, decimal @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
         {
             this.Status = @status;
             this.Type = @type;
@@ -2499,16 +2487,14 @@ namespace Bitpanda.RestClient
         public string Fiat_id { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_fiat", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Amount_fiat { get; }
+        public decimal Amount_fiat { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_cryptocoin", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Amount_cryptocoin { get; }
     
         [Newtonsoft.Json.JsonProperty("fiat_to_eur_rate", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Fiat_to_eur_rate { get; }
+        public decimal Fiat_to_eur_rate { get; }
     
         [Newtonsoft.Json.JsonProperty("wallet_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]

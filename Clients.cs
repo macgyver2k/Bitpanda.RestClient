@@ -2457,6 +2457,62 @@ namespace Bitpanda.RestClient
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.4.1.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TagType 
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public TagType(TagAttributes @attributes, string @type)
+        {
+            this.Type = @type;
+            this.Attributes = @attributes;
+        }
+    
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Type { get; }
+    
+        [Newtonsoft.Json.JsonProperty("attributes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TagAttributes Attributes { get; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.4.1.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TagAttributes 
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public TagAttributes(string @name, string @short_name)
+        {
+            this.Short_name = @short_name;
+            this.Name = @name;
+        }
+    
+        [Newtonsoft.Json.JsonProperty("short_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Short_name { get; }
+    
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.4.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum TradeType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"buy")]
@@ -2471,7 +2527,7 @@ namespace Bitpanda.RestClient
     public partial class TradeAttributes 
     {
         [Newtonsoft.Json.JsonConstructor]
-        public TradeAttributes(decimal @amount_cryptocoin, decimal @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, decimal @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<string> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
+        public TradeAttributes(string @amount_cryptocoin, decimal @amount_fiat, bool @bfc_used, string @cryptocoin_id, string @fiat_id, decimal @fiat_to_eur_rate, System.Guid @fiat_wallet_id, bool @is_card, bool @is_savings, bool @is_swap, string @payment_option_id, decimal @price, Trade @related_swap_trade, string @status, System.Collections.Generic.ICollection<TagType> @tags, TimeResult @time, TradeType @type, System.Guid @wallet_id)
         {
             this.Status = @status;
             this.Type = @type;
@@ -2514,7 +2570,8 @@ namespace Bitpanda.RestClient
         public decimal Amount_fiat { get; }
     
         [Newtonsoft.Json.JsonProperty("amount_cryptocoin", Required = Newtonsoft.Json.Required.Always)]
-        public decimal Amount_cryptocoin { get; }
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Amount_cryptocoin { get; }
     
         [Newtonsoft.Json.JsonProperty("fiat_to_eur_rate", Required = Newtonsoft.Json.Required.Always)]
         public decimal Fiat_to_eur_rate { get; }
@@ -2550,7 +2607,7 @@ namespace Bitpanda.RestClient
         public bool Bfc_used { get; }
     
         [Newtonsoft.Json.JsonProperty("tags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<string> Tags { get; }
+        public System.Collections.Generic.ICollection<TagType> Tags { get; }
     
         [Newtonsoft.Json.JsonProperty("related_swap_trade", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Trade Related_swap_trade { get; }

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: OpenAPI 3.0 definition for bitpanda.com public API
-  version: 1.0.0-oas3
+  version: '2.0'
   title: Bitpanda Public API
 security:
   - api_key: []
@@ -842,7 +842,24 @@ components:
         is_index:
           type: boolean
           example: false
-  
+    
+    TagType:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "tag"
+        attributes:
+          $ref: '#/components/schemas/TagAttributes'
+    
+    TagAttributes:
+      type: object
+      properties:
+        short_name:
+          type: string
+        name:
+          type: string
+    
     TradeType:
       type: string
       enum:
@@ -920,8 +937,7 @@ components:
         tags:
           type: array
           items:
-            type: string
-            example: tag
+            $ref: '#/components/schemas/TagType'
         related_swap_trade:
           $ref: '#/components/schemas/Trade'
  

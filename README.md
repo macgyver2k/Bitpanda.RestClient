@@ -1,3 +1,5 @@
+OpenAPI 3.0 Specs: https://github.com/macgyver2k/bitpanda-openapi-specs
+
 ```csharp
 using Bitpanda.RestClient;
 

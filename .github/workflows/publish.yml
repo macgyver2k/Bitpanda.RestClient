@@ -21,10 +21,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Pack NuGet
+      run: dotnet pack --include-symbols
     - name: Publish NuGet      
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: Bitpanda.RestClient.csproj
-        VERSION_REGEX: <VersionPrefix>(.*)<\/VersionPrefix>
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}                                                             
-        INCLUDE_SYMBOLS: true
+      run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+
